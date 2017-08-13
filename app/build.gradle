@@ -26,5 +26,7 @@ dependencies {
     })
     compile 'com.android.support:design:25.2.0'
     compile 'com.android.support:appcompat-v7:25.2.0'
+    //mobile vision library
+    compile 'com.google.android.gms:play-services-vision:11.0.4'
     testCompile 'junit:junit:4.12'
 }
