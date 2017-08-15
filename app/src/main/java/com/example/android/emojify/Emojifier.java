@@ -17,6 +17,8 @@ public class Emojifier {
 
     private static final String LOG_TAG = "GetClassification";
 
+    public static boolean smiling,leftEyeClosed,rightEyeClosed;
+
     public static int detectFaces(Context context, Bitmap bitmap){
 
         FaceDetector detector = new FaceDetector.Builder(context)
@@ -32,23 +34,67 @@ public class Emojifier {
 
         for(int i=0; i<faces.size();i++){
             Face faceAtI = faces.valueAt(i);
-            getClassifications(faceAtI);
+            whichEmoji(faceAtI);
         }
 
         detector.release();
         return faces.size();
     }
 
-    public static void getClassifications(Face face){
 
-        float smile = face.getIsSmilingProbability();
-        float leftEye = face.getIsLeftEyeOpenProbability();
-        float rightEye = face.getIsRightEyeOpenProbability();
-        Log.v(LOG_TAG,"Smiling Probability - " + String.valueOf(smile));
-        Log.v(LOG_TAG,"LeftEye open Probability - " + String.valueOf(leftEye));
-        Log.v(LOG_TAG,"RightEye open Probability - " + String.valueOf(rightEye));
+    private enum Emoji {
+        LEFT_WINK,RIGHT_WINK,CLOSED_EYE_SMILE,RIGHT_WINK_FROWN,LEFT_WINK_FROWN,
+        CLOSED_EYE_FROWN,FROWN,SMILE
     }
 
+    public static Emoji whichEmoji(Face face){
+
+        float smile = face.getIsSmilingProbability();
+        float leftEyeC = face.getIsLeftEyeOpenProbability();
+        float rightEyeC = face.getIsRightEyeOpenProbability();
+        Log.v(LOG_TAG,"Smiling Probability - " + String.valueOf(smile));
+        Log.v(LOG_TAG,"LeftEye open Probability - " + String.valueOf(leftEyeC));
+        Log.v(LOG_TAG,"RightEye open Probability - " + String.valueOf(rightEyeC));
+
+        if(smile>0.15){
+            smiling = true;
+        }
+        if(leftEyeC<0.5){
+            leftEyeClosed = true;
+        }
+        if(rightEyeC<0.5){
+            rightEyeClosed = true;
+        }
+
+
+        // Determine and log the appropriate emoji
+        Emoji emoji;
+        if(smiling) {
+            if (leftEyeClosed && !rightEyeClosed) {
+                emoji = Emoji.LEFT_WINK;
+            }  else if(rightEyeClosed && !leftEyeClosed){
+                emoji = Emoji.RIGHT_WINK;
+            } else if (leftEyeClosed){
+                emoji = Emoji.CLOSED_EYE_SMILE;
+            } else {
+                emoji = Emoji.SMILE;
+            }
+        } else {
+            if (leftEyeClosed && !rightEyeClosed) {
+                emoji = Emoji.LEFT_WINK_FROWN;
+            }  else if(rightEyeClosed && !leftEyeClosed){
+                emoji = Emoji.RIGHT_WINK_FROWN;
+            } else if (leftEyeClosed){
+                emoji = Emoji.CLOSED_EYE_FROWN;
+            } else {
+                emoji = Emoji.FROWN;
+            }
+        }
+
+        // Log the chosen Emoji
+        Log.d(LOG_TAG, "whichEmoji: " + emoji.name());
+        return emoji;
+    }
 
 }
 
