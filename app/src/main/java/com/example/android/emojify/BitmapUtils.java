@@ -84,6 +84,7 @@ class BitmapUtils {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss",
                 Locale.getDefault()).format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
+        //Returns the absolute path to the application specific cache directory on the filesystem.
         File storageDir = context.getExternalCacheDir();
 
         return File.createTempFile(
@@ -122,10 +123,18 @@ class BitmapUtils {
      * @param imagePath The path of the saved image
      */
     private static void galleryAddPic(Context context, String imagePath) {
+        //Broadcast Action: Request the media scanner to scan a file and add it to
+        // the media database. The path to the file is contained in the Intent.mData field.
         Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
         File f = new File(imagePath);
         Uri contentUri = Uri.fromFile(f);
         mediaScanIntent.setData(contentUri);
+        //Broadcast the given intent to all interested BroadcastReceivers. This call is
+        // asynchronous; it returns immediately, and you will continue executing while the
+        // receivers are run. No results are propagated from receivers and receivers can not
+        // abort the broadcast. If you want to allow receivers to propagate results or abort
+        // the broadcast, you must send an ordered broadcast using
+        // sendOrderedBroadcast(Intent, String).
         context.sendBroadcast(mediaScanIntent);
     }
 
@@ -186,7 +195,14 @@ class BitmapUtils {
         // Create the share intent and start the share activity
         File imageFile = new File(imagePath);
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        //type determines the type of application an intent would choose
         shareIntent.setType("image/*");
+        //To share a file with another app using a content URI, your app has to generate
+        // the content URI. To generate the content URI, create a new File for the file,
+        // then pass the File to getUriForFile(). You can send the content URI returned by
+        // getUriForFile() to another app in an Intent. The client app that receives the content
+        // URI can open the file and access its contents by calling
+        // ContentResolver.openFileDescriptor to get a ParcelFileDescriptor.
         Uri photoURI = FileProvider.getUriForFile(context, FILE_PROVIDER_AUTHORITY, imageFile);
         shareIntent.putExtra(Intent.EXTRA_STREAM, photoURI);
         context.startActivity(shareIntent);

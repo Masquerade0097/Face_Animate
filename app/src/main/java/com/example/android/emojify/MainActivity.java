@@ -30,6 +30,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_STORAGE_PERMISSION = 1;
 
     private static final String FILE_PROVIDER_AUTHORITY = "com.example.android.fileprovider";
+    private static final String LOG_TAG = "ProcessAnsSetImage method";
 
     private ImageView mImageView;
 
@@ -58,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
     private String mTempPhotoPath;
 
     private Bitmap mResultsBitmap;
+    private int numberOfFaces;
 
 
     @Override
@@ -183,6 +186,19 @@ public class MainActivity extends AppCompatActivity {
 
         // Set the new bitmap to the ImageView
         mImageView.setImageBitmap(mResultsBitmap);
+
+        numberOfFaces = Emojifier.detectFaces(this,mResultsBitmap);
+        if(numberOfFaces == 0){
+            Toast.makeText(this,"No Face Detected",Toast.LENGTH_LONG).show();
+        }else if(numberOfFaces < 0){
+            Log.v(LOG_TAG,"Error in detecting faces");
+        }else if(numberOfFaces == 1){
+            Toast.makeText(this, numberOfFaces + " Face Detected",Toast.LENGTH_LONG).show();
+        }else{
+            Toast.makeText(this, numberOfFaces + " Faces Detected",Toast.LENGTH_LONG).show();
+        }
+
+
     }
 
 
