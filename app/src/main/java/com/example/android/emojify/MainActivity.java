@@ -30,7 +30,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -185,19 +184,9 @@ public class MainActivity extends AppCompatActivity {
         mResultsBitmap = BitmapUtils.resamplePic(this, mTempPhotoPath);
 
         // Set the new bitmap to the ImageView
-        mImageView.setImageBitmap(mResultsBitmap);
+//        mImageView.setImageBitmap(mResultsBitmap);
 
-        numberOfFaces = Emojifier.detectFaces(this,mResultsBitmap);
-        if(numberOfFaces == 0){
-            Toast.makeText(this,"No Face Detected",Toast.LENGTH_LONG).show();
-        }else if(numberOfFaces < 0){
-            Log.v(LOG_TAG,"Error in detecting faces");
-        }else if(numberOfFaces == 1){
-            Toast.makeText(this, numberOfFaces + " Face Detected",Toast.LENGTH_LONG).show();
-        }else{
-            Toast.makeText(this, numberOfFaces + " Faces Detected",Toast.LENGTH_LONG).show();
-        }
-
+        mImageView.setImageBitmap(Emojifier.detectFacesAndOverlayEmoji(this,mResultsBitmap));
 
     }
 
