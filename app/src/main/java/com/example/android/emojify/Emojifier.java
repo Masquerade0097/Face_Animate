@@ -64,13 +64,16 @@ public class Emojifier {
             Bitmap emojiBitmap;
             switch(whichEmoji(faceAtI)){
                 case LEFT_WINK :
+                    //Resources are the additional files and static content that your code uses,
+                    // such as bitmaps, layout definitions, user interface strings,
+                    // animation instructions, and more.
                     emojiBitmap = BitmapFactory.decodeResource(context.getResources(),R.drawable.leftwink);
                     break;
                 case RIGHT_WINK:
                     emojiBitmap = BitmapFactory.decodeResource(context.getResources(),R.drawable.rightwink);
                     break;
                 case CLOSED_EYE_SMILE:
-                    emojiBitmap = BitmapFactory.decodeResource(context.getResources(),R.drawable.closed_frown);
+                    emojiBitmap = BitmapFactory.decodeResource(context.getResources(),R.drawable.closed_smile);
                     break;
                 case RIGHT_WINK_FROWN:
                     emojiBitmap = BitmapFactory.decodeResource(context.getResources(),R.drawable.rightwinkfrown);
@@ -114,15 +117,9 @@ public class Emojifier {
         Log.v(LOG_TAG,"LeftEye open Probability - " + String.valueOf(leftEyeC));
         Log.v(LOG_TAG,"RightEye open Probability - " + String.valueOf(rightEyeC));
 
-        if(smile>0.15){
-            smiling = true;
-        }
-        if(leftEyeC<0.5){
-            leftEyeClosed = true;
-        }
-        if(rightEyeC<0.5){
-            rightEyeClosed = true;
-        }
+        smiling = smile > 0.3;
+        leftEyeClosed = leftEyeC < 0.5;
+        rightEyeClosed = rightEyeC < 0.5;
 
 
         // Determine and log the appropriate emoji
