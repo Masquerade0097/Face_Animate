@@ -1,4 +1,4 @@
-package com.example.android.emojify;
+package com.masquerade.face.animate;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

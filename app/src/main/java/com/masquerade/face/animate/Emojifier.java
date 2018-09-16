@@ -1,4 +1,4 @@
-package com.example.android.emojify;
+package com.masquerade.face.animate;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -12,14 +12,14 @@ import com.google.android.gms.vision.Frame;
 import com.google.android.gms.vision.face.Face;
 import com.google.android.gms.vision.face.FaceDetector;
 
-import static com.example.android.emojify.Emojifier.Emoji.CLOSED_EYE_FROWN;
-import static com.example.android.emojify.Emojifier.Emoji.CLOSED_EYE_SMILE;
-import static com.example.android.emojify.Emojifier.Emoji.FROWN;
-import static com.example.android.emojify.Emojifier.Emoji.LEFT_WINK;
-import static com.example.android.emojify.Emojifier.Emoji.LEFT_WINK_FROWN;
-import static com.example.android.emojify.Emojifier.Emoji.RIGHT_WINK;
-import static com.example.android.emojify.Emojifier.Emoji.RIGHT_WINK_FROWN;
-import static com.example.android.emojify.Emojifier.Emoji.SMILE;
+import static com.masquerade.face.animate.Emojifier.Emoji.CLOSED_EYE_FROWN;
+import static com.masquerade.face.animate.Emojifier.Emoji.CLOSED_EYE_SMILE;
+import static com.masquerade.face.animate.Emojifier.Emoji.FROWN;
+import static com.masquerade.face.animate.Emojifier.Emoji.LEFT_WINK;
+import static com.masquerade.face.animate.Emojifier.Emoji.LEFT_WINK_FROWN;
+import static com.masquerade.face.animate.Emojifier.Emoji.RIGHT_WINK;
+import static com.masquerade.face.animate.Emojifier.Emoji.RIGHT_WINK_FROWN;
+import static com.masquerade.face.animate.Emojifier.Emoji.SMILE;
 
 
 /**

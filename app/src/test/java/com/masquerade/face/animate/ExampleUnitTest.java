@@ -1,4 +1,4 @@
-package com.example.android.emojify;
+package com.masquerade.face.animate;
 
 import org.junit.Test;
 

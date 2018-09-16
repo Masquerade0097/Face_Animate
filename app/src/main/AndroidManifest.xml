@@ -15,7 +15,7 @@
  limitations under the License.-->
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.android.emojify">
+    package="com.masquerade.face.animate">
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -31,7 +31,7 @@
         android:theme="@style/AppTheme">
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.example.android.fileprovider"
+            android:authorities="com.masquerade.face.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -39,7 +39,7 @@
                 android:resource="@xml/file_paths" />
         </provider>
         <activity
-            android:name=".MainActivity"
+            android:name="com.masquerade.face.animate.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
