@@ -16,7 +16,7 @@ Have an issue? Create one using these:
 [![Chore](https://img.shields.io/badge/issues-chore-blue.svg)](https://github.com/Masquerade0097/Face_Animate/issues/new?template=chore-request.md)
 
 ### Libraries:
-- [Google Vision](https://github.com/ReactiveX/RxJava)
+- [Mobile Vision](https://developers.google.com/vision/)
 
 ### Android Development Setup
 
